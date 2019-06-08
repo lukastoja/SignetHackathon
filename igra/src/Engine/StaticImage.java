@@ -22,6 +22,13 @@ public class StaticImage extends BasicElement{
 		return this.img;
 	}
 	
+	public void setPosition(int x, int y) {
+		this.origx = x;
+		this.x = x;
+		this.origy = y;
+		this.y = y;
+	}
+	
 
 	@Override
 	public Position getDrawingPosition() {
