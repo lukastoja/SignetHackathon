@@ -131,7 +131,6 @@ public class DashboardGame extends EngineEpisode{
 		{
 			pun = pun - 0.5;
 		}
-		crta.setPosition(posx, (int)(posy - (510)*pun));
 		if(pun < 0)
 		{
 			pun = 0;
@@ -140,6 +139,7 @@ public class DashboardGame extends EngineEpisode{
 		{
 			System.out.println("Pobijeda!!!!!!!!");
 		}
+		crta.setPosition(posx, (int)(posy - (510)*pun));
 		System.out.println(pun);
 	}
 	
