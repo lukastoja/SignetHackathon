@@ -202,7 +202,9 @@ public class DashboardGame extends EngineEpisode{
 			napuni();
 			if(pun >= 1)
 			{
-				System.exit(0);
+				CinematicSix game = new CinematicSix();
+				game.setEngine(getEngine());
+				getEngine().setEpisode(game);
 			}
 			InicijalnoBlinkanje blinkanje = new InicijalnoBlinkanje(2000);
 			getEngine().attachThread(blinkanje);

@@ -107,7 +107,9 @@ public class LabirintGame extends EngineEpisode{
 			if (playerX == posShip.getX()-1 && playerY == posShip.getY()
 					|| playerX == posShip.getX() && playerY == posShip.getY()-1) {
 				System.out.println("Stigao!");
-				System.exit(0); 
+				CinematicFive game = new CinematicFive();
+				game.setEngine(getEngine());
+				getEngine().setEpisode(game);
 			}
 			for (LabirintBlock blk: blocks) {
 				Position blkPos = blk.getPosition();

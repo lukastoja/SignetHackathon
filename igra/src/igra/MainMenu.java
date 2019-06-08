@@ -81,6 +81,12 @@ public class MainMenu extends EngineEpisode{
 			{
 				System.exit(0);
 			}
+			if(pos_kursor == pos_play)
+			{
+				CinematicOne game = new CinematicOne();
+				game.setEngine(getEngine());
+				getEngine().setEpisode(game);
+			}
 		}
 	}
 

@@ -9,16 +9,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import Engine.CenterCamera;
-import Engine.DollyCamera;
 import Engine.EngineCore;
 import Engine.EngineEpisode;
-import Engine.FixedContainer;
 import Engine.ImageContainer;
-import Engine.StaticCamera;
 import Engine.StaticImage;
 import Engine.TextView;
 
-public class CinematicOne extends EngineEpisode{
+public class CinematicSix extends EngineEpisode{
 	public float SCALE_FACTOR = 1f;
 	
 	@Override
@@ -33,11 +30,10 @@ public class CinematicOne extends EngineEpisode{
 		if(key == KeyEvent.VK_ENTER && state == KeyEvent.KEY_PRESSED)
 		{
 
-			DiggingGame game = new DiggingGame();
+			PackmanGame game = new PackmanGame();
 			game.setEngine(getEngine());
 			getEngine().setEpisode(game);
 		}
-		
 	}
 
 	@Override
