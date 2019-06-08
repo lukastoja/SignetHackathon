@@ -47,7 +47,7 @@ public class CinematicFour extends EngineEpisode{
 		
 		Image img0=null;
 		try {
-			img0 = ImageIO.read(new File("../Assets/sastanak.png"));
+			img0 = ImageIO.read(new File("../Assets/sastanak1.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,8 +61,8 @@ public class CinematicFour extends EngineEpisode{
 		
 		TextView txt = new TextView(engineCore);
 		txt.writeText("Erik hola la", 10.0f);
-		txt.setColor(Color.green);
-		txt.setPosition(140, getEngine().getHeight()-50);
+		txt.setColor(Color.black);
+		txt.setPosition(140, getEngine().getHeight()-25);
 		this.addViewComponent(txt);
 		bindKey(KeyEvent.VK_ENTER, "vk_enter");
 		
