@@ -1,6 +1,8 @@
 package igra;
 
+import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -11,6 +13,7 @@ import Engine.EngineCore;
 import Engine.EngineEpisode;
 import Engine.ImageContainer;
 import Engine.StaticImage;
+import Engine.TextView;
 
 public class GameOver extends EngineEpisode{
 	public float SCALE_FACTOR = 1f;
@@ -23,7 +26,13 @@ public class GameOver extends EngineEpisode{
 
 	@Override
 	public void keyPressed(int key, int state) {
-		// TODO Auto-generated method stub
+		if(key == KeyEvent.VK_ENTER && state == KeyEvent.KEY_PRESSED)
+		{
+
+			MainMenu game = new MainMenu();
+			game.setEngine(getEngine());
+			getEngine().setEpisode(game);
+		}
 		
 	}
 
@@ -49,6 +58,14 @@ public class GameOver extends EngineEpisode{
 		
 		StaticImage menu = new StaticImage(engineCore, img0, posx, posy);
 		container.add(menu);
+		
+		TextView txt = new TextView(engineCore);
+		txt.writeText("Press ENTER to go to MainMenu", 10.0f);
+		txt.setColor(Color.white);
+		txt.setPosition(500 , getEngine().getHeight()-100);
+		this.addViewComponent(txt);
+		
+		bindKey(KeyEvent.VK_ENTER, "vk_enter");
 	}
 
 }
