@@ -23,7 +23,7 @@ public class TextView extends ViewComponent{
 		//AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f - blk.transparency);
 		//g2d.setComposite(ac);
 		g2d.setColor(color);
-		g2d.drawString(currentlyWritten, 200, 200);
+		g2d.drawString(currentlyWritten, this.getDrawingPosition().x, this.getDrawingPosition().y);
 		
 		//g2d.setComposite(oldComposite);
 		
