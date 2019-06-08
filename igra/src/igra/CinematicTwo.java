@@ -48,7 +48,7 @@ public class CinematicTwo extends EngineEpisode{
 		
 		Image img0=null;
 		try {
-			img0 = ImageIO.read(new File("../Assets/cinematic0_1024.jpg"));
+			img0 = ImageIO.read(new File("../Assets/teleskopscena.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
