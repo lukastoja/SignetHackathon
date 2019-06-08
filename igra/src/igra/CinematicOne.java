@@ -58,6 +58,7 @@ public class CinematicOne extends EngineEpisode{
 		TextView txt = new TextView(engineCore);
 		txt.writeText("Erik hola la", 4.0f);
 		txt.setColor(Color.green);
+		txt.setPosition(100, getEngine().getHeight()-50);
 		this.addViewComponent(txt);
 		
 	}
