@@ -58,7 +58,7 @@ public class LabirintGame extends EngineEpisode{
 		
 		FollowingCamera camera = new FollowingCamera(player);
 		this.setCameraController(camera);
-		camera.setZoom(0.5f);
+		camera.setZoom(0.4f);
 		
 		bindKeys();
 		
@@ -116,7 +116,7 @@ public class LabirintGame extends EngineEpisode{
 				float dist = (float) distanceBetweenPoints(blkPosX, blkPosY, playerX, playerY);
 				float maxDist = (float) distanceBetweenPoints(0, 0, w, h);
 				System.out.println(dist / maxDist);
-				//blk.setTransparancy(0.5f);
+				blk.setTransparancy((float) Math.min(1.0 - (float) Math.pow(0.00002, dist / maxDist), 1.0f) );
 			}
 		}
 	}
