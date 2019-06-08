@@ -32,12 +32,13 @@ public class CinematicOne extends EngineEpisode{
 	public void init(EngineCore engineCore) {
 		StaticCamera camera = new StaticCamera(0, 0);
 		this.setCameraController(camera);
-		Image img0;
+		Image img0=null;
 		try {
-			img0 = ImageIO.read(new File("../Assets/dio1.jpg"));
+			img0 = ImageIO.read(new File("../Assets/cinematic0_1024.jpg"));
 			//StaticImage menu = new StaticImage(engineCore, img0, engineCore.getWidth()/2 - img0.getWidth(null)/2, engineCore.getHeight()/2 - img0.getHeight(null)/2);
 			StaticImage menu = new StaticImage(engineCore, img0, 0, 0);
 			ImageContainer container = new ImageContainer(engineCore);
+			this.addViewComponent(container);
 			container.add(menu);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
