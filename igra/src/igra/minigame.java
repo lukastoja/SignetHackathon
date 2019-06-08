@@ -5,9 +5,9 @@ import Engine.EngineCore;
 public class minigame {
 
 	public static void main(String[] args) {
-		EngineCore engine = new EngineCore(640, 480, false);
+		EngineCore engine = new EngineCore(640, 480, true);
 		
-		PackmanGame game = new PackmanGame();
+		LabirintGame game = new LabirintGame();
 		game.setEngine(engine);
 		
 		engine.setEpisode(game);
