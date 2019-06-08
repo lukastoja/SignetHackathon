@@ -39,6 +39,9 @@ public class DashboardGame extends EngineEpisode{
 	StaticImage lampica5;
 	StaticImage lampica6;
 	StaticImage lampica7;
+	StaticImage crta;
+	public int posx;
+	public int posy;
 	
 	//funkcije
 	public void generiraj_niz()
@@ -128,7 +131,7 @@ public class DashboardGame extends EngineEpisode{
 		{
 			pun = pun - 0.5;
 		}
-		
+		crta.setPosition(posx, (int)(posy - (525)*pun));
 		if(pun < 0)
 		{
 			pun = 0;
@@ -199,7 +202,7 @@ public class DashboardGame extends EngineEpisode{
 			napuni();
 			if(pun >= 1)
 			{
-				System.exit(0);
+				//System.exit(0);
 			}
 			InicijalnoBlinkanje blinkanje = new InicijalnoBlinkanje(2000);
 			getEngine().attachThread(blinkanje);
@@ -258,9 +261,15 @@ public class DashboardGame extends EngineEpisode{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		Image imgCrta=null;
+		try {
+			imgCrta = ImageIO.read(new File("../Assets/dashboard_level.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-		int posx = engineCore.getWidth()/2 - (int)(imgDashboard.getWidth(null)*SCALE_FACTOR/2);
-		int posy = engineCore.getHeight()/2 - (int)(imgDashboard.getHeight(null)*SCALE_FACTOR/2);
+		posx = engineCore.getWidth()/2 - (int)(imgDashboard.getWidth(null)*SCALE_FACTOR/2);
+		posy = engineCore.getHeight()/2 - (int)(imgDashboard.getHeight(null)*SCALE_FACTOR/2);
 		
 		StaticImage dashboard = new StaticImage(engineCore, imgDashboard, posx, posy);
 		lampica1 = new StaticImage(engineCore, imgLampica1, posx, posy);
@@ -270,6 +279,7 @@ public class DashboardGame extends EngineEpisode{
 		lampica5 = new StaticImage(engineCore, imgLampica5, posx, posy);
 		lampica6 = new StaticImage(engineCore, imgLampica6, posx, posy);
 		lampica7 = new StaticImage(engineCore, imgLampica7, posx, posy);
+		crta = new StaticImage(engineCore, imgCrta, posx, posy);
 		
 		dashboard.setScale(SCALE_FACTOR);
 		lampica1.setScale(SCALE_FACTOR);
@@ -279,6 +289,7 @@ public class DashboardGame extends EngineEpisode{
 		lampica5.setScale(SCALE_FACTOR);
 		lampica6.setScale(SCALE_FACTOR);
 		lampica7.setScale(SCALE_FACTOR);
+		crta.setScale(SCALE_FACTOR);
 		
 		lampica1.setTransparancy(1.0f);
 		lampica2.setTransparancy(1.0f);
@@ -296,6 +307,9 @@ public class DashboardGame extends EngineEpisode{
 		container.add(lampica5);
 		container.add(lampica6);
 		container.add(lampica7);
+		container.add(crta);
+		
+		
 		
 		
 		bindKey(KeyEvent.VK_1, "vk_1");
