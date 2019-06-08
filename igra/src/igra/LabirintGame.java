@@ -58,7 +58,7 @@ public class LabirintGame extends EngineEpisode{
 		
 		FollowingCamera camera = new FollowingCamera(player);
 		this.setCameraController(camera);
-		camera.setZoom(0.5f);
+		camera.setZoom(0.4f);
 		
 		bindKeys();
 		
@@ -107,7 +107,9 @@ public class LabirintGame extends EngineEpisode{
 			if (playerX == posShip.getX()-1 && playerY == posShip.getY()
 					|| playerX == posShip.getX() && playerY == posShip.getY()-1) {
 				System.out.println("Stigao!");
-				System.exit(0); 
+				CinematicFive game = new CinematicFive();
+				game.setEngine(getEngine());
+				getEngine().setEpisode(game);
 			}
 			for (LabirintBlock blk: blocks) {
 				Position blkPos = blk.getPosition();
@@ -116,7 +118,7 @@ public class LabirintGame extends EngineEpisode{
 				float dist = (float) distanceBetweenPoints(blkPosX, blkPosY, playerX, playerY);
 				float maxDist = (float) distanceBetweenPoints(0, 0, w, h);
 				System.out.println(dist / maxDist);
-				//blk.setTransparancy(0.5f);
+				blk.setTransparancy((float) Math.min(1.0 - (float) Math.pow(0.00002, dist / maxDist), 1.0f) );
 			}
 		}
 	}

@@ -24,7 +24,7 @@ public class DashboardGame extends EngineEpisode{
 	private int pogodzeno = 0;
 	private double postotak;
 	private double pun = 0;
-	public float SCALE_FACTOR = 0.3f;
+	public float SCALE_FACTOR = 0.35f;
 	public Image imgLampica1=null;
 	public Image imgLampica2=null;
 	public Image imgLampica3=null;
@@ -131,7 +131,6 @@ public class DashboardGame extends EngineEpisode{
 		{
 			pun = pun - 0.5;
 		}
-		crta.setPosition(posx, (int)(posy - (525)*pun));
 		if(pun < 0)
 		{
 			pun = 0;
@@ -140,6 +139,7 @@ public class DashboardGame extends EngineEpisode{
 		{
 			System.out.println("Pobijeda!!!!!!!!");
 		}
+		crta.setPosition(posx, (int)(posy - (510)*pun));
 		System.out.println(pun);
 	}
 	
@@ -202,7 +202,9 @@ public class DashboardGame extends EngineEpisode{
 			napuni();
 			if(pun >= 1)
 			{
-				//System.exit(0);
+				CinematicSix game = new CinematicSix();
+				game.setEngine(getEngine());
+				getEngine().setEpisode(game);
 			}
 			InicijalnoBlinkanje blinkanje = new InicijalnoBlinkanje(2000);
 			getEngine().attachThread(blinkanje);
@@ -214,7 +216,6 @@ public class DashboardGame extends EngineEpisode{
 	public void init(EngineCore engineCore) {
 		CenterCamera camera = new CenterCamera();
 		this.setCameraController(camera);
-		System.out.println(Arrays.toString(niz));
 		
 		FixedContainer container = new FixedContainer(engineCore);
 		this.addViewComponent(container);

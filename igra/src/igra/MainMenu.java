@@ -42,16 +42,16 @@ public class MainMenu extends EngineEpisode{
 			
 			if(pos_kursor == pos_play)
 			{
-				kursor.setPosition((int)(0.3f * getEngine().getWidth()), (int)(0.2f * getEngine().getHeight()));
+				kursor.setPosition((int)(0.36f * getEngine().getWidth()), (int)(0.2f * getEngine().getHeight()));
 			} else if(pos_kursor == pos_setting)
 			{
-				kursor.setPosition((int)(0.3f * getEngine().getWidth()), (int)(0.3f * getEngine().getHeight()));
+				kursor.setPosition((int)(0.36f * getEngine().getWidth()), (int)(0.31f * getEngine().getHeight()));
 			} else if(pos_kursor == pos_about)
 			{
-				kursor.setPosition((int)(0.3f * getEngine().getWidth()), (int)(0.4f * getEngine().getHeight()));
+				kursor.setPosition((int)(0.36f * getEngine().getWidth()), (int)(0.41f * getEngine().getHeight()));
 			} else if(pos_kursor == pos_exit)
 			{
-				kursor.setPosition((int)(0.3f * getEngine().getWidth()), (int)(0.5f * getEngine().getHeight()));
+				kursor.setPosition((int)(0.36f * getEngine().getWidth()), (int)(0.51f * getEngine().getHeight()));
 			}
 		}
 		if(key == KeyEvent.VK_DOWN && state == KeyEvent.KEY_PRESSED ) {
@@ -63,16 +63,16 @@ public class MainMenu extends EngineEpisode{
 			
 			if(pos_kursor == pos_play)
 			{
-				kursor.setPosition((int)(0.3f * getEngine().getWidth()), (int)(0.2f * getEngine().getHeight()));
+				kursor.setPosition((int)(0.36f * getEngine().getWidth()), (int)(0.2f * getEngine().getHeight()));
 			} else if(pos_kursor == pos_setting)
 			{
-				kursor.setPosition((int)(0.3f * getEngine().getWidth()), (int)(0.3f * getEngine().getHeight()));
+				kursor.setPosition((int)(0.36f * getEngine().getWidth()), (int)(0.31f * getEngine().getHeight()));
 			} else if(pos_kursor == pos_about)
 			{
-				kursor.setPosition((int)(0.3f * getEngine().getWidth()), (int)(0.4f * getEngine().getHeight()));
+				kursor.setPosition((int)(0.36f * getEngine().getWidth()), (int)(0.41f * getEngine().getHeight()));
 			} else if(pos_kursor == pos_exit)
 			{
-				kursor.setPosition((int)(0.3f * getEngine().getWidth()), (int)(0.5f * getEngine().getHeight()));
+				kursor.setPosition((int)(0.36f * getEngine().getWidth()), (int)(0.51f * getEngine().getHeight()));
 			}
 		}
 		if(key == KeyEvent.VK_ENTER && state == KeyEvent.KEY_PRESSED)
@@ -80,6 +80,12 @@ public class MainMenu extends EngineEpisode{
 			if(pos_kursor == pos_exit)
 			{
 				System.exit(0);
+			}
+			if(pos_kursor == pos_play)
+			{
+				CinematicOne game = new CinematicOne();
+				game.setEngine(getEngine());
+				getEngine().setEpisode(game);
 			}
 		}
 	}
@@ -94,7 +100,7 @@ public class MainMenu extends EngineEpisode{
 		
 		Image imgMenu=null;
 		try {
-			imgMenu = ImageIO.read(new File("../Assets/menu_640.png"));
+			imgMenu = ImageIO.read(new File("../Assets/menu1280x720.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -107,7 +113,7 @@ public class MainMenu extends EngineEpisode{
 		}
 		
 		StaticImage menu = new StaticImage(engineCore, imgMenu, engineCore.getWidth()/2 - imgMenu.getWidth(null)/2, engineCore.getHeight()/2 - imgMenu.getHeight(null)/2);
-		kursor = new StaticImage(engineCore, covjeculjak, (int)(0.3f * engineCore.getWidth()), (int)(0.2f * engineCore.getHeight()));
+		kursor = new StaticImage(engineCore, covjeculjak, (int)(0.36f * engineCore.getWidth()), (int)(0.2f * engineCore.getHeight()));
 		
 		container.add(menu);
 		container.add(kursor);

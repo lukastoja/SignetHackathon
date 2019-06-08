@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class GridBlock extends BasicElement{
 	Grid grid;
-	boolean moving = false;
+	public boolean moving = false;
 	
 	public GridBlock(Grid grid, int x, int y) {
 		super(grid.getEngine());
