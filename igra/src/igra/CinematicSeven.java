@@ -30,9 +30,7 @@ public class CinematicSeven extends EngineEpisode{
 		if(key == KeyEvent.VK_ENTER && state == KeyEvent.KEY_PRESSED)
 		{
 
-			PackmanGame game = new PackmanGame();
-			game.setEngine(getEngine());
-			getEngine().setEpisode(game);
+			System.exit(0);
 		}
 	}
 
