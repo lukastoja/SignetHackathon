@@ -32,12 +32,15 @@ public class FixedContainer extends ViewComponent{
 			}
 			
 			Position pos = el.getDrawingPosition();
+			float scale = el.getScale();
+			g2d.scale(scale, scale);
 			
 			Composite oldComposite = g2d.getComposite();
 			AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f - el.transparency);
 			g2d.setComposite(ac);
 			g2d.drawImage(el.getImage(), pos.getX() + offset.x, pos.getY() + offset.y, frame);
 			
+			g2d.scale(1/scale, 1/scale);
 			g2d.setComposite(oldComposite);
 		}
 		

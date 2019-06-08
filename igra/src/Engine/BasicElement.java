@@ -10,6 +10,7 @@ public abstract class BasicElement {
 	public float boundingRadius;
 	Image img;
 	EngineCore engineCore;
+	float scale=1.0f;
 	public abstract Position getDrawingPosition();
 	public abstract Position getPosition();
 	public abstract int getWidth();
@@ -46,5 +47,13 @@ public abstract class BasicElement {
 	
 	public Image getImage() {
 		return img;
+	}
+	
+	public void setScale(float scale) {
+		this.scale = scale;
+	}
+	
+	public float getScale() {
+		return this.scale;
 	}
 }
