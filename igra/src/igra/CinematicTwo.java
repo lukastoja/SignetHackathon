@@ -61,7 +61,7 @@ public class CinematicTwo extends EngineEpisode{
 		container.add(menu);
 		
 		TextView txt = new TextView(engineCore);
-		txt.writeText("Erik hola la", 10.0f);
+		txt.writeText("After assembling the pieces of a long forgotten telescope, our hero went to look at the sky.", 10.0f);
 		txt.setColor(Color.green);
 		txt.setPosition(140, getEngine().getHeight()-50);
 		this.addViewComponent(txt);

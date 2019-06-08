@@ -64,7 +64,7 @@ public class CinematicOne extends EngineEpisode{
 		container.add(menu);
 		
 		TextView txt = new TextView(engineCore);
-		txt.writeText("Erik hola la", 10.0f);
+		txt.writeText("Darknes has come to the peace loving planet of Lumos. The worried inhabitant informed hiss friends about the darkness swollowing the stars that fed them with their light.", 10.0f);
 		txt.setColor(Color.green);
 		txt.setPosition(140, getEngine().getHeight()-50);
 		this.addViewComponent(txt);

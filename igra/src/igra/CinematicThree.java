@@ -60,7 +60,7 @@ public class CinematicThree extends EngineEpisode{
 		container.add(menu);
 		
 		TextView txt = new TextView(engineCore);
-		txt.writeText("Erik hola la", 10.0f);
+		txt.writeText("He waas terrified to discover that a beast waa swollowing the stars in the sky and decided to stop it.", 10.0f);
 		txt.setColor(Color.green);
 		txt.setPosition(140, getEngine().getHeight()-50);
 		this.addViewComponent(txt);

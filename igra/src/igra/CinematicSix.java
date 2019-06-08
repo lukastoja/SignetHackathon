@@ -60,7 +60,7 @@ public class CinematicSix extends EngineEpisode{
 		container.add(menu);
 		
 		TextView txt = new TextView(engineCore);
-		txt.writeText("Erik hola la", 10.0f);
+		txt.writeText("He took off to face the beast in the final battle.", 10.0f);
 		txt.setColor(Color.green);
 		txt.setPosition(140, getEngine().getHeight()-50);
 		this.addViewComponent(txt);

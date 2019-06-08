@@ -45,7 +45,7 @@ public class CinematicSeven extends EngineEpisode{
 		
 		Image img0=null;
 		try {
-			img0 = ImageIO.read(new File("../Assets/cinematic0_1024.jpg"));
+			img0 = ImageIO.read(new File("../Assets/HAPPY_END.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,7 +58,7 @@ public class CinematicSeven extends EngineEpisode{
 		container.add(menu);
 		
 		TextView txt = new TextView(engineCore);
-		txt.writeText("Erik hola la", 10.0f);
+		txt.writeText("The beast was defeated and our hero can rest and do what he likes best, feed on the starlight and drink juice.", 10.0f);
 		txt.setColor(Color.green);
 		txt.setPosition(140, getEngine().getHeight()-50);
 		this.addViewComponent(txt);
