@@ -5,6 +5,7 @@ import Engine.EngineCore;
 import Engine.EngineEpisode;
 import Engine.Grid;
 import Engine.StaticCamera;
+import java.util.Random;
 
 public class PackmanGame extends EngineEpisode{
 
@@ -54,28 +55,67 @@ public class PackmanGame extends EngineEpisode{
 	}
 	
 	private void ucitajLabirint(Grid labirintGrid) {
-		boolean labirint[][] = new boolean[31][28];
-		labirintDrawLine(labirint, 0, 0, 0, 30);    // Lijevo okvir
-		labirintDrawLine(labirint, 0, 0, 27, 0);	// Gornji okvir
-		labirintDrawLine(labirint, 27, 0, 27, 30);	// Desni okvir
-		labirintDrawLine(labirint, 0, 30, 27, 30);	// Donji okvir
+		Random rand = new Random();
 		
-		//Gornja lijeva kucica
-		labirintDrawLine(labirint, 2, 2, 5, 2);
-		labirintDrawLine(labirint, 2, 3, 5, 3);
+		int h = labirintGrid.getRows();
+		int w = labirintGrid.getCols();
 		
-		// Crta gore lijevo
-		labirintDrawLine(labirint, 2, 5, 5, 5);
+		boolean labirint[][] = new boolean[h][w];
+		//Rubovi
+		labirintDrawLine(labirint, 0, 0, 0, h-1);    // Lijevo okvir
+		labirintDrawLine(labirint, 0, 0, w-1, 0);	// Gornji okvir
+		labirintDrawLine(labirint, w-1, 0, w-1, h-1);	// Desni okvir
+		labirintDrawLine(labirint, 0, h-1, w-1, h-1);	// Donji okvir
+
+		//Horizontalne linije
+		for(int i=2; i < h; i+=2) {
+			for(int j=2; j < w-2; j++) {
+				labirint[i][j] = true;
+			}
+		}
+
+		//Tetris oblici
+		int tetris = 5;
+		for(int t=0; t < tetris; t++) {
+			if (w > 4) {
+				int lo = 3;
+				int hi = h - 3;
+				int i = rand.nextInt(hi-lo) + lo;
+				while (i % 2 == 0) i = rand.nextInt(hi-lo) + lo;
+				int low = 2;
+				int high = w - 2;
+				int point = rand.nextInt(high-low) + low;
+				labirint[i][point] = true;
+				if (i < h / 2) {
+					labirint[i+1][point] = false;
+					labirint[i+1][point+1] = false;
+					labirint[i+1][point-1] = false;
+				} else {
+					labirint[i-1][point] = false;
+					labirint[i-1][point+1] = false;
+					labirint[i-1][point-1] = false;
+				}
+			}
+		}
 		
-		labirintDrawLine(labirint, 0, 7, 5, 7);
-		labirintDrawLine(labirint, 5, 7, 5, 21);
+		//Okomiti prolazi
+		for(int i=2; i < h; i+=2) {
+			if (w > 4 && i < h-1) {
+				int passages = rand.nextInt((w - 4)/2);
+				for(int j=0; j < passages; j++) {
+					int low = 2;
+					int high = w - 2;
+					int passage = rand.nextInt(high-low) + low;
+					while (labirint[i][passage] == false || (labirint[i-1][passage] == true || labirint[i+1][passage] == true)) {
+						passage = rand.nextInt(high-low) + low;
+					}
+					labirint[i][passage] = false;
+				}
+			}
+		}
 		
-		//Gornja lijeva kucica 2
-		labirintDrawLine(labirint, 7, 2, 11, 2);
-		labirintDrawLine(labirint, 7, 3, 11, 3);
-		
-		for(int i=0; i < 31; i++) {
-			for(int j=0; j < 28; j++) {
+		for(int i=0; i < h; i++) {
+			for(int j=0; j < w; j++) {
 				if(labirint[i][j] == true) {
 					LabirintBlock blk = new LabirintBlock(labirintGrid, j, i);
 					labirintGrid.add(blk);
