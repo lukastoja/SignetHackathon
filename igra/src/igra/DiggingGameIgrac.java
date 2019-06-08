@@ -22,7 +22,7 @@ public class DiggingGameIgrac extends GridBlock{
 	@Override
 	public void moveTo(int destX, int destY, double speed, ActionCompleted actionCompleted) {		
 		GridBlock blk = zemljaGrid.get(destX, destY);
-		if(blk != null && blk instanceof Kamen)return;
+		if(blk != null && blk instanceof DiggingGameKamen)return;
 		super.moveTo(destX, destY, speed, actionCompleted);
 	}
 
