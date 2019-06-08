@@ -92,18 +92,16 @@ public class MainMenu extends EngineEpisode{
 		FixedContainer container = new FixedContainer(engineCore);
 		this.addViewComponent(container);
 		
-		//Image imgMenu = Toolkit.getDefaultToolkit().getImage("../Assets/menu_640.png");
 		Image imgMenu=null;
 		try {
 			imgMenu = ImageIO.read(new File("../Assets/menu_640.png"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		Image covjeculjak = null;
 		try {
-			covjeculjak = ImageIO.read(new File("../Assets/lik_desno_100x100.png"));
+			covjeculjak = ImageIO.read(new File("../Assets/lik_desno_50x50.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -113,8 +111,6 @@ public class MainMenu extends EngineEpisode{
 		
 		container.add(menu);
 		container.add(kursor);
-		
-		//menu.setPosition((int)(0.3f * engineCore.getWidth()), 10);
 		
 		bindKey(KeyEvent.VK_Q, "vk_q");
 		bindKey(KeyEvent.VK_UP, "vk_up");
