@@ -9,10 +9,12 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+import Engine.ActionCompleted;
 import Engine.CenterCamera;
 import Engine.EngineCore;
 import Engine.EngineEpisode;
 import Engine.EngineThread;
+import Engine.FadeView;
 import Engine.FixedContainer;
 import Engine.StaticImage;
 
@@ -151,6 +153,9 @@ public class DashboardGame extends EngineEpisode{
 
 	@Override
 	public void keyPressed(int key, int state) {
+		if(key == KeyEvent.VK_O && state == KeyEvent.KEY_PRESSED) {
+			pobjeda();
+		}
 		if(state == KeyEvent.KEY_RELEASED)
 		{
 			return;
@@ -202,14 +207,28 @@ public class DashboardGame extends EngineEpisode{
 			napuni();
 			if(pun >= 1)
 			{
-				CinematicSix game = new CinematicSix();
-				game.setEngine(getEngine());
-				getEngine().setEpisode(game);
+				pobjeda();
 			}
 			InicijalnoBlinkanje blinkanje = new InicijalnoBlinkanje(2000);
 			getEngine().attachThread(blinkanje);
 			System.out.println("niz " + Arrays.toString(niz));
 		}
+	}
+	
+	public void pobjeda() {		
+		FadeView fadeView = new FadeView(getEngine());
+		fadeView.setFaded(false);
+		addViewComponent(fadeView);
+		fadeView.fadeOut(0.3f);
+		fadeView.setListener(new ActionCompleted() {
+
+			@Override
+			public void actionCompleted() {
+				CinematicSix game = new CinematicSix();
+				game.setEngine(getEngine());
+				getEngine().setEpisode(game);
+			}
+		});
 	}
 
 	@Override
@@ -320,6 +339,7 @@ public class DashboardGame extends EngineEpisode{
 		bindKey(KeyEvent.VK_5, "vk_5");
 		bindKey(KeyEvent.VK_6, "vk_6");
 		bindKey(KeyEvent.VK_7, "vk_7");
+		bindKey(KeyEvent.VK_O, "vk_o");
 		
 		InicijalnoBlinkanje blinkanje = new InicijalnoBlinkanje(0);
 		engineCore.attachThread(blinkanje);

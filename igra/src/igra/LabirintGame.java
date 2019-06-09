@@ -7,6 +7,7 @@ import java.util.Random;
 import Engine.ActionCompleted;
 import Engine.EngineCore;
 import Engine.EngineEpisode;
+import Engine.FadeView;
 import Engine.FollowingCamera;
 import Engine.Grid;
 import Engine.GridBlock;
@@ -33,6 +34,8 @@ public class LabirintGame extends EngineEpisode{
 			player.moveLeft(SPEED, new PlayerStigao());
 		}else if(isKeyPressed(KeyEvent.VK_RIGHT) == true) {
 			player.moveRight(SPEED, new PlayerStigao());
+		}else if(isKeyPressed(KeyEvent.VK_O) == true) {
+			pobjeda();
 		}
 		
 	}
@@ -56,14 +59,17 @@ public class LabirintGame extends EngineEpisode{
 		player = new LabirintIgrac(labirintGrid, 1, 1);
 		labirintGrid.add(player);
 		
-		FollowingCamera camera = new FollowingCamera(player);
+		MyFollowingCamera camera = new MyFollowingCamera(player);
 		this.setCameraController(camera);
+		camera.setCorrection(-850, -500);
 		camera.setZoom(0.4f);
 		
 		bindKeys();
 		
 		ship = new LabirintShip(labirintGrid, w-2, h-2);
 		labirintGrid.add(ship);
+		
+		this.updateTransparency(player.getPosition().getX(), player.getPosition().getY());
 	}
 	
 	private void generirajLabirint(Grid labirintGrid) {	
@@ -87,6 +93,7 @@ public class LabirintGame extends EngineEpisode{
 		bindKey(KeyEvent.VK_DOWN, "key_down");
 		bindKey(KeyEvent.VK_LEFT, "key_left");
 		bindKey(KeyEvent.VK_RIGHT, "key_right");
+		bindKey(KeyEvent.VK_O, "key_o");
 	}
 	
 	private double distanceBetweenPoints(
@@ -95,6 +102,35 @@ public class LabirintGame extends EngineEpisode{
 	  double x2, 
 	  double y2) {       
 	    return Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
+	}
+	
+	private void updateTransparency(int playerX, int playerY) {
+		for (LabirintBlock blk: blocks) {
+			Position blkPos = blk.getPosition();
+			int blkPosX = blkPos.getX();
+			int blkPosY = blkPos.getY();
+			float dist = (float) distanceBetweenPoints(blkPosX, blkPosY, playerX, playerY);
+			float maxDist = (float) distanceBetweenPoints(0, 0, w, h);
+			System.out.println(dist / maxDist);
+			blk.setTransparancy((float) Math.min(1.0 - (float) Math.pow(0.00002, dist / maxDist), 1.0f) );
+		}
+	}
+	
+	public void pobjeda() {
+		FadeView fadeView = new FadeView(getEngine());
+		fadeView.setFaded(false);
+		addViewComponent(fadeView);
+		fadeView.fadeOut(0.3f);
+		fadeView.setListener(new ActionCompleted() {
+
+			@Override
+			public void actionCompleted() {
+				CinematicFive c = new CinematicFive();
+				c.setEngine(getEngine());
+				getEngine().setEpisode(c);
+			}
+			
+		});
 	}
 	
 	private class PlayerStigao implements ActionCompleted{
@@ -106,20 +142,9 @@ public class LabirintGame extends EngineEpisode{
 			int playerY = posPlayer.getY();
 			if (playerX == posShip.getX()-1 && playerY == posShip.getY()
 					|| playerX == posShip.getX() && playerY == posShip.getY()-1) {
-				System.out.println("Stigao!");
-				CinematicFive game = new CinematicFive();
-				game.setEngine(getEngine());
-				getEngine().setEpisode(game);
+				pobjeda();
 			}
-			for (LabirintBlock blk: blocks) {
-				Position blkPos = blk.getPosition();
-				int blkPosX = blkPos.getX();
-				int blkPosY = blkPos.getY();
-				float dist = (float) distanceBetweenPoints(blkPosX, blkPosY, playerX, playerY);
-				float maxDist = (float) distanceBetweenPoints(0, 0, w, h);
-				System.out.println(dist / maxDist);
-				blk.setTransparancy((float) Math.min(1.0 - (float) Math.pow(0.00002, dist / maxDist), 1.0f) );
-			}
+			updateTransparency(playerX, playerY);
 		}
 	}
 }

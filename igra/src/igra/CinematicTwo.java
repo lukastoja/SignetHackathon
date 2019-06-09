@@ -62,7 +62,7 @@ public class CinematicTwo extends EngineEpisode{
 		
 		TextView txt = new TextView(engineCore);
 		txt.writeText("After assembling the pieces of a long forgotten telescope, our hero went to look at the sky.", 10.0f);
-		txt.setColor(Color.green);
+		txt.setColor(Color.BLACK);
 		txt.setPosition(140, getEngine().getHeight()-50);
 		this.addViewComponent(txt);
 		bindKey(KeyEvent.VK_ENTER, "vk_enter");

@@ -14,7 +14,7 @@ public class PackmanGameZvijezda extends GridBlock{
 	public PackmanGameZvijezda(Grid grid, int x, int y) {
 		super(grid, x, y);
 		try {
-			Image img = ImageIO.read(new File("../Assets/zvijezda.png"));
+			Image img = ImageIO.read(new File("../Assets/xcf/zvijezda_64.png"));
 			this.setImage(img);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -59,8 +59,8 @@ public class CinematicSeven extends EngineEpisode{
 		
 		TextView txt = new TextView(engineCore);
 		txt.writeText("The beast was defeated and our hero can rest and do what he likes best, feed on the starlight and drink juice.", 10.0f);
-		txt.setColor(Color.green);
-		txt.setPosition(140, getEngine().getHeight()-50);
+		txt.setColor(Color.BLACK);
+		txt.setPosition(140, getEngine().getHeight()-15);
 		this.addViewComponent(txt);
 		bindKey(KeyEvent.VK_ENTER, "vk_enter");
 		

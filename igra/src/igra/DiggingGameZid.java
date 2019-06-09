@@ -11,11 +11,11 @@ import Engine.EngineCore;
 import Engine.Grid;
 import Engine.GridBlock;
 
-public class DiggingGameBlokZemlje extends GridBlock{
+public class DiggingGameZid extends GridBlock{
 
-	public DiggingGameBlokZemlje(Grid grid, int x, int y) {
+	public DiggingGameZid(Grid grid, int x, int y) {
 		super(grid, x, y);
-		Image zemlja = Toolkit.getDefaultToolkit().getImage("../Assets/pijesak_40.jpg");
+		Image zemlja = Toolkit.getDefaultToolkit().getImage("../Assets/cigla_zid_40.jpg");
 		this.setImage(zemlja);
 	}
 

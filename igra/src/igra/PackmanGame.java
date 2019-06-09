@@ -1,11 +1,13 @@
 package igra;
 
+import Engine.ActionCompleted;
 import Engine.BasicElement;
 import Engine.CenterCamera;
 import Engine.CollisionGroup;
 import Engine.CollisionListener;
 import Engine.EngineCore;
 import Engine.EngineEpisode;
+import Engine.FadeView;
 import Engine.FollowingCamera;
 import Engine.Grid;
 import Engine.GridBlock;
@@ -21,7 +23,7 @@ public class PackmanGame extends EngineEpisode{
 	public static final int MAZE_WIDTH = 28;
 	public static final int MAZE_HEIGHT = 31;
 	public static final float PLAYER_SPEED = 7.0f;
-	public static final float DISTANCE = 0.2f;
+	public static final float DISTANCE = 1.0f;
 	public static final float JEDAC_SPEED = 5.0f;
 	Grid labirintGrid;
 	Grid playerGrid;
@@ -41,6 +43,8 @@ public class PackmanGame extends EngineEpisode{
 			player.moveLeft(PLAYER_SPEED, null);
 		}else if(isKeyPressed(KeyEvent.VK_RIGHT) == true) {
 			player.moveRight(PLAYER_SPEED, null);
+		}else if(isKeyPressed(KeyEvent.VK_O) == true) {
+			pobjeda();
 		}
 		
 		for(int i=0; i < jedaci.size(); i++) {
@@ -60,6 +64,7 @@ public class PackmanGame extends EngineEpisode{
 				continue;
 			}
 			
+			boolean flag = false;
 			for(int j=0; j < zvjezde.size(); j++) {
 				dx = Math.abs(jedaci.get(i).getPosition().getX() - zvjezde.get(j).getPosition().getX());
 				dy = Math.abs(jedaci.get(i).getPosition().getY() - zvjezde.get(j).getPosition().getY());
@@ -67,9 +72,17 @@ public class PackmanGame extends EngineEpisode{
 				if(dx+dy == 0) {
 					zvjezde.get(j).remove();
 					zvjezde.remove(j);
+					flag = true;
 					j--;
 					continue;
 				}
+			}
+			
+			if(flag == true && zvjezde.size() == 0) {
+				System.out.println("Gameover");
+				GameOver gameOver = new GameOver();
+				gameOver.setEngine(getEngine());
+				this.getEngine().setEpisode(gameOver);
 			}
 			
 			int smjer = dobiSmjerZaJedaca(jedaci.get(i));
@@ -188,7 +201,9 @@ public class PackmanGame extends EngineEpisode{
 		j.setLives(2);
 		
 		
-		FollowingCamera camera = new FollowingCamera(player);
+		MyFollowingCamera camera = new MyFollowingCamera(player);
+		camera.setZoom(0.5f);
+		camera.setCorrection(-600, -400);
 		this.setCameraController(camera);
 		
 		bindKeys();
@@ -215,12 +230,13 @@ public class PackmanGame extends EngineEpisode{
 		bindKey(KeyEvent.VK_DOWN, "key_down");
 		bindKey(KeyEvent.VK_LEFT, "key_left");
 		bindKey(KeyEvent.VK_RIGHT, "key_right");
+		bindKey(KeyEvent.VK_O, "key_o");
 	}
 	
 	private void dodajZvijezde() {
 		for(int i=0; i < labirint.length; i++) {
 			for(int j=0; j < labirint[i].length; j++) {
-				if(rnd.nextFloat() > 0.3f)continue;
+				if(rnd.nextFloat() > 0.2f)continue;
 				
 				if(labirint[i][j] == false) {
 					PackmanGameZvijezda zvijezda = new PackmanGameZvijezda(labirintGrid, j, i);
@@ -337,6 +353,23 @@ public class PackmanGame extends EngineEpisode{
 		}
 	}
 	
+	public void pobjeda() {
+		FadeView fadeView = new FadeView(getEngine());
+		fadeView.setFaded(false);
+		addViewComponent(fadeView);
+		fadeView.fadeOut(0.3f);
+		fadeView.setListener(new ActionCompleted() {
+
+			@Override
+			public void actionCompleted() {
+				CinematicSeven c = new CinematicSeven();
+				c.setEngine(getEngine());
+				getEngine().setEpisode(c);
+			}
+			
+		});
+	}
+	
 	private class JedacPojeden implements CollisionListener{
 
 		@Override
@@ -345,6 +378,10 @@ public class PackmanGame extends EngineEpisode{
 			PackmanGameJedac jedac = (PackmanGameJedac)el2;
 			jedac.remove();
 			jedaci.remove(jedac);
+			
+			if(jedac.getLives() == 0 && jedaci.size() == 0) {
+				pobjeda();
+			}
 		}
 		
 	}

@@ -1,10 +1,12 @@
 package igra;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -13,6 +15,7 @@ import Engine.EngineCore;
 import Engine.EngineEpisode;
 import Engine.FixedContainer;
 import Engine.StaticImage;
+import Engine.TextView;
 
 public class MainMenu extends EngineEpisode{
 	StaticImage kursor;
@@ -86,6 +89,32 @@ public class MainMenu extends EngineEpisode{
 				CinematicOne game = new CinematicOne();
 				game.setEngine(getEngine());
 				getEngine().setEpisode(game);
+			}
+			if(pos_kursor == pos_about) {
+				TextView txt = new TextView(getEngine());
+				String authorsArr[] = new String[3];
+				authorsArr[0] = "Erik Otovic";
+				authorsArr[1] = "Luka Otovic";
+				authorsArr[2] = "Ivana Zuzic";
+				Random rnd = new Random();
+				for(int i=0; i < 10; i++) {
+					int a = rnd.nextInt(3);
+					int b = rnd.nextInt(3);
+					String tmp = authorsArr[a];
+					authorsArr[a] = authorsArr[b];
+					authorsArr[b] = tmp;
+				}
+				
+				txt.writeText("This game was (successfully) developed @SignetHackathon on 8.6.2019!\n", 16.0f);
+				txt.setColor(Color.BLACK);
+				txt.setPosition(250, 650);
+				this.addViewComponent(txt);
+				
+				TextView txtAuthors = new TextView(getEngine());
+				txtAuthors.writeText("Authors in random order: " + authorsArr[0] + ", " + authorsArr[1] + " and " + authorsArr[2], 16.0f);
+				txtAuthors.setColor(Color.BLACK);
+				txtAuthors.setPosition(250, 680);
+				this.addViewComponent(txtAuthors);
 			}
 		}
 	}

@@ -62,7 +62,7 @@ public class CinematicFour extends EngineEpisode{
 		TextView txt = new TextView(engineCore);
 		txt.writeText("He told his friends what he saw and they decided he'll find a forgotten spaceship to go and defeat the beast.", 10.0f);
 		txt.setColor(Color.black);
-		txt.setPosition(140, getEngine().getHeight()-25);
+		txt.setPosition(120, getEngine().getHeight()-25);
 		this.addViewComponent(txt);
 		bindKey(KeyEvent.VK_ENTER, "vk_enter");
 		

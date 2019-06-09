@@ -11,6 +11,7 @@ public class FadeView extends ViewComponent{
 	private float transparency = 1.0f;
 	private boolean fadingInProgress = false;
 	float fadeSpeed;
+	ActionCompleted listener=null;
 	
 	public FadeView(EngineCore engineCore) {
 		super(engineCore);
@@ -26,6 +27,10 @@ public class FadeView extends ViewComponent{
 		g2d.fillRect(0, 0, getEngine().getWidth(), getEngine().getHeight());
 		
 		g2d.setComposite(oldComposite);
+	}
+	
+	public void setListener(ActionCompleted l) {
+		this.listener = l;
 	}
 	
 	public void setFaded(boolean faded) {
@@ -58,6 +63,8 @@ public class FadeView extends ViewComponent{
 			if(transparency >= 1.0f) {
 				transparency = 1.0f;
 				fadingInProgress = false;
+				
+				if(listener != null)listener.actionCompleted();
 				super.stop();
 				return;
 			}
@@ -72,6 +79,7 @@ public class FadeView extends ViewComponent{
 			if(transparency <= 0.0f) {
 				transparency = 0.0f;
 				fadingInProgress = false;
+				if(listener != null)listener.actionCompleted();
 				super.stop();
 				return;
 			}

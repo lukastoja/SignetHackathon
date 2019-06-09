@@ -3,6 +3,7 @@ package Engine;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Composite;
+import java.awt.Font;
 import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
@@ -22,9 +23,13 @@ public class TextView extends ViewComponent{
 		Composite oldComposite = g2d.getComposite();
 		//AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f - blk.transparency);
 		//g2d.setComposite(ac);
+		Font font = g2d.getFont();
 		g2d.setColor(color);
+		g2d.setFont(new Font("TimesRoman", Font.BOLD, 19)); 
+		if(currentlyWritten == null)currentlyWritten="";
 		g2d.drawString(currentlyWritten, this.getDrawingPosition().x, this.getDrawingPosition().y);
 		
+		g2d.setFont(font);
 		//g2d.setComposite(oldComposite);
 		
 	}

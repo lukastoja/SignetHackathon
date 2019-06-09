@@ -14,7 +14,7 @@ import Engine.Grid;
 import Engine.GridBlock;
 
 public class PackmanGameIgrac extends GridBlock{
-	Image likRavno, likDesno, likLijevo;
+	Image imgRavno, imgDesno, imgLijevo;
 	Grid labirintGrid;
 	
 	public PackmanGameIgrac(Grid grid, Grid labirintGrid, int x, int y) {
@@ -31,14 +31,18 @@ public class PackmanGameIgrac extends GridBlock{
 		}
 		*/
 		
-		likRavno = Toolkit.getDefaultToolkit().getImage("../Assets/lik_ravno_64.png");
-		this.setImage(likRavno);
+		//likRavno = Toolkit.getDefaultToolkit().getImage("../Assets/lik_ravno_64.png");
+		imgRavno = Toolkit.getDefaultToolkit().getImage("../Assets/lik_ravno_64.png");
+		imgLijevo = Toolkit.getDefaultToolkit().getImage("../Assets/lik_lijevo_64.png");
+		imgDesno = Toolkit.getDefaultToolkit().getImage("../Assets/lik_desno_64.png");
+		this.setImage(imgRavno);
 	}
 	
 	
 
 	@Override
 	public void moveUp(double speed, ActionCompleted actionCompleted) {
+		this.setImage(imgRavno);
 		moveTo(origx, origy-1, speed, actionCompleted);
 	}
 
@@ -46,6 +50,7 @@ public class PackmanGameIgrac extends GridBlock{
 
 	@Override
 	public void moveDown(double speed, ActionCompleted actionCompleted) {
+		this.setImage(imgRavno);
 		moveTo(origx, origy+1, speed, actionCompleted);
 	}
 
@@ -53,6 +58,7 @@ public class PackmanGameIgrac extends GridBlock{
 
 	@Override
 	public void moveLeft(double speed, ActionCompleted actionCompleted) {
+		this.setImage(imgLijevo);
 		moveTo(origx-1, origy, speed, actionCompleted);
 	}
 
@@ -60,6 +66,7 @@ public class PackmanGameIgrac extends GridBlock{
 
 	@Override
 	public void moveRight(double speed, ActionCompleted actionCompleted) {
+		this.setImage(imgDesno);
 		moveTo(origx+1, origy, speed, actionCompleted);
 	}
 

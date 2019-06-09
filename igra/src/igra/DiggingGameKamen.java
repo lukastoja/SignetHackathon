@@ -13,6 +13,7 @@ import Engine.Position;
 public class DiggingGameKamen extends GridBlock {
 	public static final float BRZINA_PADANJA = 4.0f;
 	Grid playerGrid;
+	public DiggingGameIgrac player;
 	boolean rezervacije[][];
 	ArrayList<Position> mojeRezervacije = new ArrayList<>();
 
@@ -29,12 +30,21 @@ public class DiggingGameKamen extends GridBlock {
 		this.setImage(img);
 	}
 
-	public void padaj() {
-		if (isMoving())
-			return;
+	public boolean padaj() {
+		if (isMoving()) {
+			Position pos1 = player.getDrawingPosition();
+			Position pos2 = this.getDrawingPosition();
+			int dx = pos1.getX()-pos2.getX();
+			int dy = pos1.getY()-pos2.getY();
+			if(Math.sqrt(dx*dx+dy*dy) < 35) {
+				return true;
+			}
+			
+			return false;
+		}
 		Position mojaPozicija = this.getPosition();
 		if (mojaPozicija.getY() == this.getGrid().getRows() - 1)
-			return;
+			return false;
 		BasicElement ispodMene = getGrid().get(mojaPozicija.getX(), mojaPozicija.getY() + 1);
 
 		if (playerGrid.get(mojaPozicija.getX(), mojaPozicija.getY() + 1) == null) {
@@ -43,7 +53,7 @@ public class DiggingGameKamen extends GridBlock {
 				rezervacije[mojaPozicija.getY() + 1][mojaPozicija.getX()] = true;
 				mojeRezervacije.add(new Position(mojaPozicija.getX(), mojaPozicija.getY() + 1));
 				this.moveTo(mojaPozicija.getX(), mojaPozicija.getY() + 1, BRZINA_PADANJA, new ZavrsioPadati());
-				return;
+				return false;
 			}
 		}
 
@@ -64,7 +74,7 @@ public class DiggingGameKamen extends GridBlock {
 				mojeRezervacije.add(new Position(mojaPozicija.getX() - 1, mojaPozicija.getY()));
 				mojeRezervacije.add(new Position(mojaPozicija.getX() - 1, mojaPozicija.getY() + 1));
 				this.moveAlongPath(pathToMove, BRZINA_PADANJA, new ZavrsioPadati());
-				return;
+				return false;
 			}
 		}
 
@@ -86,9 +96,11 @@ public class DiggingGameKamen extends GridBlock {
 				mojeRezervacije.add(new Position(mojaPozicija.getX() + 1, mojaPozicija.getY()));
 				mojeRezervacije.add(new Position(mojaPozicija.getX() + 1, mojaPozicija.getY() + 1));
 				this.moveAlongPath(pathToMove, BRZINA_PADANJA, new ZavrsioPadati());
-				return;
+				return false;
 			}
 		}
+		
+		return false;
 	}
 
 	private class ZavrsioPadati implements ActionCompleted {
